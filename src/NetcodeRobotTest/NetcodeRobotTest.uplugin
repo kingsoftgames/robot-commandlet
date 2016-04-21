@@ -1,0 +1,28 @@
+{
+    "FileVersion"	: 3,
+
+    "FriendlyName"	: "Netcode Robot Test",
+    "Version"	: 1,
+    "VersionName"	: "1.0",
+    "CreatedBy"	: "Seasun Games, Inc.",
+    "CreatedByURL"	: "http://kingsoft.com",
+    "EngineVersion"	: "4.11.0",
+    "Description"	: "A unit testing framework for testing the ROG2New netcode, primarily for bugs and exploits",
+    "Category"	:  "Networking",
+    
+    "Modules"	:
+    [
+        {
+            "Name"			: "NetcodeRobotTest",
+            "Type"			: "Runtime",
+
+            "WhitelistPlatforms"	:
+            [
+                "Win64",
+                "Win32",
+                "Linux"
+            ]
+        }
+    ]
+}
+

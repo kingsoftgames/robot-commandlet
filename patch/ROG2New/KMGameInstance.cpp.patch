@@ -1,0 +1,13 @@
+Index: KMGameInstance.cpp
+===================================================================
+--- KMGameInstance.cpp	(revision 82403)
++++ KMGameInstance.cpp	(working copy)
+@@ -17,7 +17,7 @@
+ 
+ 	void Start()
+ 	{
+-		if (UKismetSystemLibrary::IsDedicatedServer(Owner))
++		if (UKismetSystemLibrary::IsDedicatedServer(Owner) && (!PRIVATE_GIsRunningCommandlet))
+ 		{
+ 			UE_LOG(KMGameInstanceLog, Log, TEXT("This is DedicateServer"));
+ 			Owner->GameFrame = NewObject<UKMGameFrame>(Owner, Owner->GameFrameServerClass);

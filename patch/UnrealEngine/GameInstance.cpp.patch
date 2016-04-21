@@ -1,0 +1,14 @@
+Index: Engine/Source/Runtime/Engine/Private/GameInstance.cpp
+===================================================================
+--- Engine/Source/Runtime/Engine/Private/GameInstance.cpp	(revision 82586)
++++ Engine/Source/Runtime/Engine/Private/GameInstance.cpp	(working copy)
+@@ -335,7 +335,8 @@
+ 		{
+ 			const FText Message = FText::Format(NSLOCTEXT("Engine", "MapNotFound", "The map specified on the commandline '{0}' could not be found. Would you like to load the default map instead?"), FText::FromString(URL.Map));
+ 			if (   FCString::Stricmp(*URL.Map, *DefaultMap) != 0  
+-				&& FMessageDialog::Open(EAppMsgType::OkCancel, Message) != EAppReturnType::Ok)
++				&& FMessageDialog::Open(EAppMsgType::OkCancel, Message) != EAppReturnType::Ok
++                && !PRIVATE_GIsRunningCommandlet)
+ 			{
+ 				// user canceled (maybe a typo while attempting to run a commandlet)
+ 				FPlatformMisc::RequestExit(false);
