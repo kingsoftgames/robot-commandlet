@@ -2,11 +2,11 @@
 
 namespace UnrealBuildTool.Rules
 {
-    public class NetcodeRobotTest : ModuleRules
+    public class NetcodeRobot : ModuleRules
     {
-        public NetcodeRobotTest(TargetInfo Target)
+        public NetcodeRobot(TargetInfo Target)
         {
-            PrivateIncludePaths.Add("NetcodeRobotTest/Private");
+            PrivateIncludePaths.Add("NetcodeRobot/Private");
 
             PublicDependencyModuleNames.AddRange
             (

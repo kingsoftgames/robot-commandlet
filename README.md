@@ -1,4 +1,4 @@
-#`UE4` 通用机器人插件 `NetcodeRobotTest`
+#`UE4` 通用机器人插件 `NetcodeRobot`
 
 ## 简介
 
@@ -31,9 +31,9 @@
 
 参照 `Unreal Engine` 的 `Commandlet` 运行方式运行本插件：打开游戏工程的编辑器的 `Edit` > `Plugins` 的窗口，在`Networking` 分支下确认本插件的 `Enable` 被选择上。进入`UnrealEngine/Engine/Binaries` 中当前平台的可执行程序目录（如 `Linux`, `Win32` 和 `Win64` 等），然后输入下面的命令：
 
-	UE4Editor.exe "$GameProject" -run=NetcodeRobotTest.RobotTestCommandlet -RobotTestServer=$ServerIp:$Port -RobotTestMap=$Map
+	UE4Editor.exe "$GameProject" -run=NetcodeRobot.RobotCommandlet -RobotServer=$ServerIp:$Port -RobotMap=$Map
 
-第一个参数用引号将需要测试的游戏工程 `.uproject` 文件所在的绝对路径填入其中，第二个参数是表示选择本插件，第三个参数 `RobotTestServer` 是将需要连接的服务的地址和端口传入插件， 最后一个参数是指定服务器的运行地图（格式按配置文件中地图文件的填写方式）。
+第一个参数用引号将需要测试的游戏工程 `.uproject` 文件所在的绝对路径填入其中，第二个参数是表示选择本插件，第三个参数 `RobotServer` 是将需要连接的服务的地址和端口传入插件， 最后一个参数是指定服务器的运行地图（格式按配置文件中地图文件的填写方式）。
 
 ##注意事项
 
@@ -80,13 +80,16 @@ else
 
 ##文件列表
 
-- [NetcodeRobotTest]()
+- [src]()
+	- [NetcodeRobot]()
+- [patch]() 
+	- [GameInstance.cpp.patch]()
+	- [KMGameInstance.cpp.patch]()
 - [PackagingRobot.sh]()
 - [CustomResource.sh]()
-- [GameInstance.cpp.patch]()
-- [KMGameInstance.cpp.patch]()
+- [README.md]()
 
-**`NetcodeRobotTest`** 目录是插件的源码和工程目录，应用时将整个目录拷贝到对应的 `Plugins` 目录中。
+**`NetcodeRobot`** 目录是插件的源码和工程目录，应用时将整个目录拷贝到对应的 `Plugins` 目录中。
 
 `PackagingRobot.sh` 是 **Linux** 下的机器人程序和资源的打包脚本，需要将它放到游戏工程根目录中运行（`.uproject` 文件所在的目录），它会将机器人所需要的可执行程序、动态链接库和必要的资源文件另外拷贝整理并做打包处理。
 
@@ -95,5 +98,3 @@ else
 `GameInstance.cpp.patch` 是上面注意事项中第4项的修改的 `patch` 文件，可以在引擎根目录下应用这个 `patch` 文件产生修改，或者参照上面文档描述直接代码中修改。
 
 `KMGameInstance.cpp.patch` 是针对本测试插件的目标游戏工程的修改，其他游戏工程不需要关心。
-
-

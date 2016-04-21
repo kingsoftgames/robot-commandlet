@@ -60,18 +60,18 @@ ENUM_CLASS_FLAGS(ERobotLogType);
 // IMPORTANT: If you add more engine-log-capture globals, you must add them to the 'UNIT_EVENT_CLEAR' and related macros
 
 /** Used by to aid in hooking log messages triggered by unit tests */
-//extern NETCODEROBOTTEST_API URobotTestBase* GActiveLogRobotTest;
+//extern NETCODEROBOT_API URobotTestBase* GActiveLogRobotTest;
 
 //extern UWorld* GActiveRobotLogWorld;				// @todo JohnB: Does this make other log hooks redundant?
 
 /** The current ERobotLogType flag modifiers, associated with a UNIT_LOG or UNIT_STATUS_LOG/STATUS_LOG call */
-extern NETCODEROBOTTEST_API ERobotLogType GActiveLogTypeFlags;
+extern NETCODEROBOT_API ERobotLogType GActiveLogTypeFlags;
 
 /**
  * Declarations
  */
 
-NETCODEROBOTTEST_API DECLARE_LOG_CATEGORY_EXTERN(LogRobotTest, Log, All);
+NETCODEROBOT_API DECLARE_LOG_CATEGORY_EXTERN(LogRobot, Log, All);
 
 /**
  * Helper function, for macro defines - allows the 'UnitLogTypeFlags' macro parameters below, to be optional

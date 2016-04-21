@@ -86,7 +86,7 @@ static void AddProcessEventCallback(void* HookOrigin, InternalProcessEventCallba
     }
     else
     {
-        UE_LOG(LogRobotTest, Log, TEXT("AddProcessEventCallback: HookOrigin == NULL"));
+        UE_LOG(LogRobot, Log, TEXT("AddProcessEventCallback: HookOrigin == NULL"));
     }
 }
 

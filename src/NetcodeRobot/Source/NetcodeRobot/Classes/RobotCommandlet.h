@@ -4,13 +4,13 @@
 
 #include "Commandlets/Commandlet.h"
 
-#include "RobotTestCommandlet.generated.h"
+#include "RobotCommandlet.generated.h"
 
 /**
- * A commandlet for running ROG2 Game Robot tests, without having to launch the game client.
+ * A commandlet for running ROG2 Game Robot, without having to launch the game client.
  *
  * Usage:
- *	"UE4Editor.exe $GameProjectPath -run=NetcodeRobotTest.RobotTestCommandlet
+ *	"UE4Editor.exe $GameProjectPath -run=NetcodeRobot.RobotCommandlet
  *
  * Parameters:
  *	-RobotTestServer=127.0.0.1:5050
@@ -21,7 +21,7 @@
  */
 
 UCLASS()
-class URobotTestCommandlet : public UCommandlet
+class URobotCommandlet : public UCommandlet
 {
     GENERATED_UCLASS_BODY()
 
@@ -39,7 +39,7 @@ public:
 protected:
     void OnTimer();
 
-    static UGameInstance* GRobotTestGameInstance;
-    static URobotTestCommandlet* GRobotTestCommandletInstance;
+    static UGameInstance* GRobotGameInstance;
+    static URobotCommandlet* GRobotCommandletInstance;
     static FTimerHandle TriggerTimerHandle;
 };

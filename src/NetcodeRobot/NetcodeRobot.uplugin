@@ -1,7 +1,7 @@
 {
     "FileVersion"	: 3,
 
-    "FriendlyName"	: "Netcode Robot Test",
+    "FriendlyName"	: "Netcode Robot",
     "Version"	: 1,
     "VersionName"	: "1.0",
     "CreatedBy"	: "Seasun Games, Inc.",
@@ -13,7 +13,7 @@
     "Modules"	:
     [
         {
-            "Name"			: "NetcodeRobotTest",
+            "Name"			: "NetcodeRobot",
             "Type"			: "Runtime",
 
             "WhitelistPlatforms"	:

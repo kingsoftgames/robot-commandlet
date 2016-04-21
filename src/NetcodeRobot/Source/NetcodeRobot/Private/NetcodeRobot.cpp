@@ -1,8 +1,8 @@
 // Copyright 2016 Seasun Games, Inc. All Rights Reserved.
 
-#include "NetcodeRobotTestPCH.h"
+#include "NetcodeRobotPCH.h"
 
-#include "INetcodeRobotTest.h"
+#include "INetcodeRobot.h"
 
 ERobotLogType GActiveLogTypeFlags = ERobotLogType::None;
 
@@ -14,12 +14,12 @@ ERobotLogType GActiveLogTypeFlags = ERobotLogType::None;
  * Definitions/implementations
  */
 
-DEFINE_LOG_CATEGORY(LogRobotTest);
+DEFINE_LOG_CATEGORY(LogRobot);
 
 /**
  * Module implementation
  */
-class FNetcodeRobotTest : public INetcodeRobotTest
+class FNetcodeRobot : public INetcodeRobot
 {
 private:
     static FWorldDelegates::FWorldInitializationEvent::FDelegate OnWorldCreatedDelegate;
@@ -63,9 +63,9 @@ public:
     }
 };
 
-FWorldDelegates::FWorldInitializationEvent::FDelegate FNetcodeRobotTest::OnWorldCreatedDelegate = NULL;
+FWorldDelegates::FWorldInitializationEvent::FDelegate FNetcodeRobot::OnWorldCreatedDelegate = NULL;
 
-FDelegateHandle FNetcodeRobotTest::OnWorldCreatedDelegateHandle;
+FDelegateHandle FNetcodeRobot::OnWorldCreatedDelegateHandle;
 
 // Essential for getting the .dll to compile, and for the package to be loadable
-IMPLEMENT_MODULE(FNetcodeRobotTest, NetcodeRobotTest);
+IMPLEMENT_MODULE(FNetcodeRobot, NetcodeRobot);

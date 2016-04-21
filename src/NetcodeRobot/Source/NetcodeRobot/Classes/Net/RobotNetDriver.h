@@ -3,13 +3,13 @@
 #pragma once
 
 #include "OnlineSubsystemUtilsClasses.h"
-#include "RobotTestNetDriver.generated.h"
+#include "RobotNetDriver.generated.h"
 
 /**
  * A net driver for supporting robot test net connections
  */
 UCLASS(transient)
-class URobotTestNetDriver : public UIpNetDriver
+class URobotNetDriver : public UIpNetDriver
 {
     GENERATED_UCLASS_BODY()
 };

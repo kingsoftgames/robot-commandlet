@@ -158,7 +158,7 @@ struct NRTNet
      * @param InChIndex			Optionally, specify the index of the channel to send the bunch on
      * @param bGetNextFreeChan	Whether or not to pick the next free/unused channel, for this bunch
      */
-    static NETCODEROBOTTEST_API FOutBunch* CreateChannelBunch(int32& BunchSequence, UNetConnection* InConnection, EChannelType InChType,
+    static NETCODEROBOT_API FOutBunch* CreateChannelBunch(int32& BunchSequence, UNetConnection* InConnection, EChannelType InChType,
                                                                 int32 InChIndex=INDEX_NONE, bool bGetNextFreeChan=false);
 
     /**
@@ -167,7 +167,7 @@ struct NRTNet
      * @param InConnection		The connection to send the bunch over
      * @param ControlChanBunch	The bunch to send over the connections control channel
      */
-    static NETCODEROBOTTEST_API void SendControlBunch(UNetConnection* InConnection, FOutBunch& ControlChanBunch);
+    static NETCODEROBOT_API void SendControlBunch(UNetConnection* InConnection, FOutBunch& ControlChanBunch);
 
     /**
      * Creates an instance of the unit test net driver (can be used to create multiple such drivers, for creating multiple connections)
@@ -175,7 +175,7 @@ struct NRTNet
      * @param InWorld	The world that the net driver should be associated with
      * @return			Returns the created net driver instance
      */
-    static UNetDriver* CreateRobotTestNetDriver(UWorld* InWorld);
+    static UNetDriver* CreateRobotNetDriver(UWorld* InWorld);
 
     /**
      * Creates a fake player, connecting to the specified IP
@@ -221,7 +221,7 @@ struct NRTNet
      *
      * @return	Returns the created UWorld object
      */
-    static UWorld* CreateRobotTestWorld(bool bHookTick=true);
+    static UWorld* CreateRobotWorld(bool bHookTick=true);
 
     /**
      * Marks the specified robot test world for cleanup
@@ -229,17 +229,17 @@ struct NRTNet
      * @param CleanupWorld	The unit test world to be marked for cleanup
      * @param bImmediate	If true, all robot test worlds pending cleanup, are immediately cleaned up
      */
-    static void MarkRobotTestWorldForCleanup(UWorld* CleanupWorld, bool bImmediate=false);
+    static void MarkRobotWorldForCleanup(UWorld* CleanupWorld, bool bImmediate=false);
 
     /**
      * Cleans up robot test worlds queued for cleanup
      */
-    static void CleanupRobotTestWorlds();
+    static void CleanupRobotWorlds();
 
     /**
      * Returns true, if the specified world is a robot test world
      */
-    static bool IsRobotTestWorld(UWorld* InWorld);
+    static bool IsRobotWorld(UWorld* InWorld);
 
     /**
      * Returns true, if the Steam net driver (and thus Steam support) is enabled/available

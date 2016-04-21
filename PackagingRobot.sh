@@ -1,5 +1,5 @@
 GameName=`basename $PWD`
-MyPackPath="${GameName}RobotTest"
+MyPackPath="${GameName}Robot"
 
 GamePath="$MyPackPath/$GameName"
 GameBinariesPath="$GamePath/Binaries"
@@ -20,7 +20,7 @@ EnginePluginsPath="$InnerEnginePath/Plugins"
 EngineSavedPath="$InnerEnginePath/Saved"
 EngineShadersPath="$InnerEnginePath/Shaders"
 
-#To create RobotTest dir
+#To create Robot dir
 if [ ! -d "$MyPackPath" ]; then
     mkdir "$MyPackPath"
 else
@@ -91,7 +91,7 @@ echo "Customize this Project's resource."
 
 echo "Packaging all files! It will take some time..."
 
-tar -czvf ${GameName}RobotTest.tar.gz $MyPackPath
+tar -czvf ${GameName}Robot.tar.gz $MyPackPath
 
-echo "Robot Test Package End"
+echo "Robot Package End"
 

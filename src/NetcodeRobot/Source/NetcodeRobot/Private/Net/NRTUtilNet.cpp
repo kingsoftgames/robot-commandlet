@@ -1,6 +1,6 @@
-#include "NetcodeRobotTestPCH.h"
+#include "NetcodeRobotPCH.h"
 #include "NRTUtil.h"
-#include "Net/RobotTestNetDriver.h"
+#include "Net/RobotNetDriver.h"
 #include "Net/NRTUtilNet.h"
 #include "UnrealNetwork.h"
 #include "EngineVersion.h"
@@ -9,10 +9,10 @@
 // Forward declarations
 class FWorldTickHook;
 
-/** Active robot test worlds */
-TArray<UWorld*> RobotTestWorlds;
+/** Active robot worlds */
+TArray<UWorld*> RobotWorlds;
 
-/** Robot testing worlds, pending cleanup */
+/** Robot worlds, pending cleanup */
 TArray<UWorld*> PendingRobotWorldCleanup;
 
 /** Active world tick hooks */
@@ -184,18 +184,18 @@ void NRTNet::SendControlBunch(UNetConnection* InConnection, FOutBunch& ControlCh
     }
 }
 
-UNetDriver* NRTNet::CreateRobotTestNetDriver(UWorld* InWorld)
+UNetDriver* NRTNet::CreateRobotNetDriver(UWorld* InWorld)
 {
     UNetDriver* ReturnVal = NULL;
     UGameEngine* GameEngine = Cast<UGameEngine>(GEngine);
 
     if (GameEngine != NULL)
     {
-        static int RobotTestNetDriverCount = 0;
+        static int RobotNetDriverCount = 0;
 
         // Setup a new driver name entry
         bool bFoundDef = false;
-        FName UnitDefName = TEXT("RobotTestNetDriver");
+        FName UnitDefName = TEXT("RobotNetDriver");
 
         for (int i=0; i<GameEngine->NetDriverDefinitions.Num(); i++)
         {
@@ -211,13 +211,13 @@ UNetDriver* NRTNet::CreateRobotTestNetDriver(UWorld* InWorld)
             FNetDriverDefinition NewDriverEntry;
 
             NewDriverEntry.DefName = UnitDefName;
-            NewDriverEntry.DriverClassName = *URobotTestNetDriver::StaticClass()->GetPathName();
+            NewDriverEntry.DriverClassName = *URobotNetDriver::StaticClass()->GetPathName();
             NewDriverEntry.DriverClassNameFallback = *UNetDriver::StaticClass()->GetPathName();
 
             GameEngine->NetDriverDefinitions.Add(NewDriverEntry);
         }
 
-        FName NewDriverName = *FString::Printf(TEXT("RobotTestNetDriver_%i"), RobotTestNetDriverCount++);
+        FName NewDriverName = *FString::Printf(TEXT("RobotNetDriver_%i"), RobotNetDriverCount++);
 
         // Now create a reference to the driver
         if (GameEngine->CreateNamedNetDriver(InWorld, NewDriverName, UnitDefName))
@@ -230,16 +230,16 @@ UNetDriver* NRTNet::CreateRobotTestNetDriver(UWorld* InWorld)
             ReturnVal->SetWorld(InWorld);
             InWorld->SetNetDriver(ReturnVal);
 
-            UE_LOG(LogRobotTest, Log, TEXT("CreateRobotTestNetDriver: Created named net driver: %s, NetDriverName: %s"), *ReturnVal->GetFullName(), *ReturnVal->NetDriverName.ToString());
+            UE_LOG(LogRobot, Log, TEXT("CreateRobotNetDriver: Created named net driver: %s, NetDriverName: %s"), *ReturnVal->GetFullName(), *ReturnVal->NetDriverName.ToString());
         }
         else
         {
-            UE_LOG(LogRobotTest, Log, TEXT("CreateRobotTestNetDriver: CreateNamedNetDriver failed"));
+            UE_LOG(LogRobot, Log, TEXT("CreateRobotNetDriver: CreateNamedNetDriver failed"));
         }
     }
     else
     {
-        UE_LOG(LogRobotTest, Log, TEXT("CreateRobotTestNetDriver: GameEngine is NULL"));
+        UE_LOG(LogRobot, Log, TEXT("CreateRobotNetDriver: GameEngine is NULL"));
     }
 
     return ReturnVal;
@@ -264,7 +264,7 @@ void NRTNet::HandleBeaconReplicate(AOnlineBeaconClient* InBeacon, UNetConnection
     //
 }
 
-UWorld* NRTNet::CreateRobotTestWorld(bool bHookTick/*=true*/)
+UWorld* NRTNet::CreateRobotWorld(bool bHookTick/*=true*/)
 {
     UWorld* ReturnVal = NULL;
 
@@ -298,7 +298,7 @@ UWorld* NRTNet::CreateRobotTestWorld(bool bHookTick/*=true*/)
             n = 1;
         }
 
-        RobotTestWorlds.Add(ReturnVal);
+        RobotWorlds.Add(ReturnVal);
 
         // Hook the new worlds 'tick' event, so that we can capture logging
         if (bHookTick)
@@ -342,22 +342,22 @@ UWorld* NRTNet::CreateRobotTestWorld(bool bHookTick/*=true*/)
     return ReturnVal;
 }
 
-void NRTNet::MarkRobotTestWorldForCleanup(UWorld* CleanupWorld, bool bImmediate/*=false*/)
+void NRTNet::MarkRobotWorldForCleanup(UWorld* CleanupWorld, bool bImmediate/*=false*/)
 {
-    RobotTestWorlds.Remove(CleanupWorld);
+    RobotWorlds.Remove(CleanupWorld);
     PendingRobotWorldCleanup.Add(CleanupWorld);
 
     if (!bImmediate)
     {
-        GEngine->DeferredCommands.AddUnique(TEXT("CleanupRobotTestWorlds"));
+        GEngine->DeferredCommands.AddUnique(TEXT("CleanupRobotWorlds"));
     }
     else
     {
-        CleanupRobotTestWorlds();
+        CleanupRobotWorlds();
     }
 }
 
-void NRTNet::CleanupRobotTestWorlds()
+void NRTNet::CleanupRobotWorlds()
 {
     for (auto It=PendingRobotWorldCleanup.CreateIterator(); It; ++It)
     {
@@ -385,9 +385,9 @@ void NRTNet::CleanupRobotTestWorlds()
     CollectGarbage(GARBAGE_COLLECTION_KEEPFLAGS, true);
 }
 
-bool NRTNet::IsRobotTestWorld(UWorld* InWorld)
+bool NRTNet::IsRobotWorld(UWorld* InWorld)
 {
-    return RobotTestWorlds.Contains(InWorld);
+    return RobotWorlds.Contains(InWorld);
 }
 
 bool NRTNet::IsSteamNetDriverAvailable()
