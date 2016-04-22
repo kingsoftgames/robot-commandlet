@@ -122,6 +122,8 @@ int32 URobotCommandlet::Main(const FString& Params)
 
             if (GameEngine != NULL)
             {
+                FSlateApplication::Create();
+
                 UGameViewportClient* NewViewport = NewObject<UGameViewportClient>(GameEngine);
                 FWorldContext* CurContext = GRobotGameInstance->GetWorldContext();
 
